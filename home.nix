@@ -59,7 +59,19 @@
     zsh-abbr = {
       enable = true;
       abbreviations = {
+        ns = "sudo nixos-rebuild switch";
+        hs = "home-manager switch --flake ~/dotfiles";
+
+        b = "cargo run --bin";
+        t = "cargo atcoder test --release";
+        s = "cargo atcoder submit --release";
+
         ga = "git add";
+        gc = "git commit -m";
+        gp = "git push";
+
+        du = "docker compose up -d";
+        dd = "docker compose down";
       };
     };
 
