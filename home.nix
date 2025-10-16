@@ -17,6 +17,13 @@
   # release notes.
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+  nixpkgs.overlays = [
+    (self: super: {
+      my-noto-sans = super.callPackage ./my-noto-sans.nix { };
+      my-noto-serif = super.callPackage ./my-noto-serif.nix { };
+    })
+  ];
+
   home.packages = with pkgs; [
     docker
     fzf
@@ -36,7 +43,13 @@
 
     go
     golangci-lint
+
+    typst
+    my-noto-sans
+    my-noto-serif
   ];
+
+  fonts.fontconfig.enable = true;
 
   home.sessionVariables = {
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
