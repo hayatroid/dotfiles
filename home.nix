@@ -3,19 +3,9 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
   home.username = "hayatroid";
   home.homeDirectory = "/home/hayatroid";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
+  home.stateVersion = "25.05";
 
   nixpkgs.overlays = [
     (self: super: {
@@ -25,16 +15,25 @@
   ];
 
   home.packages = with pkgs; [
+    cz-cli
+    delta
     docker
+    dua
+    eza
+    fd
     fzf
     gcc
     git
+    gitmoji-cli
     htmlq
     jq
     openssl
     pkg-config
+    procs
+    ripgrep
     vim
     wget
+    xh
 
     nodejs
 
@@ -60,7 +59,6 @@
     "$HOME/.npm-global/bin"
   ];
 
-  # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   programs.starship.enable = true;
@@ -69,11 +67,20 @@
   programs.zsh = {
     enable = true;
 
+    shellAliases = {
+      cat = "bat";
+      diff = "batdiff";
+      grep = "batgrep";
+      ls = "eza --icons=auto --group-directories-first";
+    };
+
     zsh-abbr = {
       enable = true;
       abbreviations = {
         ns = "sudo nixos-rebuild switch";
         hs = "home-manager switch --flake ~/dotfiles";
+
+        c = "code .";
 
         b = "cargo run --bin";
         t = "cargo atcoder test --release";
@@ -92,9 +99,16 @@
       enable = true;
       plugins = [
         "hlissner/zsh-autopair"
+        "reegnz/jq-zsh-plugin"
         "zsh-users/zsh-autosuggestions"
         "zsh-users/zsh-syntax-highlighting"
       ];
     };
+  };
+
+  programs.bat = {
+    enable = true;
+    extraPackages = [ pkgs.bat-extras.core ];
+    config.theme = "GitHub";
   };
 }
