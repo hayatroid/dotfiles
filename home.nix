@@ -7,13 +7,6 @@
   home.homeDirectory = "/home/hayatroid";
   home.stateVersion = "25.05";
 
-  nixpkgs.overlays = [
-    (self: super: {
-      my-noto-sans = super.callPackage ./my-noto-sans.nix { };
-      my-noto-serif = super.callPackage ./my-noto-serif.nix { };
-    })
-  ];
-
   home.packages = with pkgs; [
     cz-cli
     delta
@@ -44,8 +37,8 @@
     golangci-lint
 
     typst
-    my-noto-sans
-    my-noto-serif
+    (noto-fonts-cjk-sans.override { static = true; })
+    (noto-fonts-cjk-serif.override { static = true; })
   ];
 
   fonts.fontconfig.enable = true;
