@@ -70,8 +70,8 @@
     zsh-abbr = {
       enable = true;
       abbreviations = {
-        ns = "sudo nixos-rebuild switch";
-        hs = "home-manager switch --flake ~/dotfiles";
+        ns = "sudo nixos-rebuild switch --flake ~/dotfiles#hayatroid";
+        hs = "home-manager switch --flake ~/dotfiles#hayatroid";
 
         c = "code .";
 
