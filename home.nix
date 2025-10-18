@@ -25,7 +25,6 @@
     procs
     ripgrep
     vim
-    wget
     xh
 
     nodejs
