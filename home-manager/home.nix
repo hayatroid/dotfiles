@@ -25,6 +25,7 @@
     procs
     ripgrep
     vim
+    xclip
     xh
 
     nodejs
@@ -64,6 +65,8 @@
       diff = "batdiff";
       grep = "batgrep";
       ls = "eza --icons=auto --group-directories-first";
+      pbcopy = "xclip -selection clipboard";
+      pbpaste = "xclip -selection clipboard -out";
     };
 
     zsh-abbr = {
