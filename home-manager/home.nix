@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./roremu
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   home.username = "hayatroid";
