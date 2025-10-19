@@ -3,7 +3,6 @@
 {
   imports = [
     ./bouyomi
-    ./roremu
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -104,6 +103,7 @@
     antidote = {
       enable = true;
       plugins = [
+        "hayatroid/zsh-roremu"
         "hlissner/zsh-autopair"
         "reegnz/jq-zsh-plugin"
         "zsh-users/zsh-autosuggestions"
