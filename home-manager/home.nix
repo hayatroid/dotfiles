@@ -29,7 +29,6 @@
     pkg-config
     procs
     ripgrep
-    vim
     xclip
     xh
 
@@ -62,11 +61,21 @@
   programs.starship.enable = true;
   programs.zoxide.enable = true;
 
+  programs.vim = {
+    enable = true;
+
+    extraConfig = ''
+      set clipboard=unnamedplus
+    '';
+  };
+
   programs.zsh = {
     enable = true;
 
     shellAliases = {
       ls = "eza --icons=auto --group-directories-first";
+      tree = "eza --icons=auto --group-directories-first --tree";
+
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -out";
     };
@@ -84,10 +93,10 @@
         s = "cargo atcoder submit --release";
 
         ga = "git add";
-        gc = "git commit -m";
+        gc = "git commit --message";
         gp = "git push";
 
-        du = "docker compose up -d";
+        du = "docker compose up --detach";
         dd = "docker compose down";
       };
     };
