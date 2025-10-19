@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./bouyomi
     ./roremu
   ];
 
@@ -68,21 +69,6 @@
       ls = "eza --icons=auto --group-directories-first";
       pbcopy = "xclip -selection clipboard";
       pbpaste = "xclip -selection clipboard -out";
-    };
-
-    siteFunctions = {
-      # ref: https://gist.github.com/ookam/c08096f78fe7ec64922f69cea7f485fc
-      bouyomi = ''
-        local bytes=$(echo -n "''$1" </dev/null | wc -c)
-        local win_ip=$(ip route | grep default | cut -d' ' -f3)
-        printf "\x01\x00\xff\xff\xff\xff\xff\xff\x00\x00\x00\x$(printf %02x ''$((bytes & 255)))\x$(printf %02x ''$((bytes >> 8)))\x00\x00''$1" | nc -w 2 ''${win_ip:-0.0.0.0} 50001
-      '';
-      akane = ''
-        bouyomi "akane) ''$1"
-      '';
-      aoi = ''
-        bouyomi "aoi) ''$1"
-      '';
     };
 
     zsh-abbr = {
