@@ -1,11 +1,20 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nix-snapshotter, ... }:
 
 {
   imports = [
     ./bouyomi
+    nix-snapshotter.homeModules.default
   ];
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.overlays = [ nix-snapshotter.overlays.default ];
+
+  virtualisation.containerd.rootless = {
+    enable = true;
+    nixSnapshotterIntegration = true;
+  };
+  services.buildkit.rootless.enable = true;
+  services.nix-snapshotter.rootless.enable = true;
 
   home.username = "hayatroid";
   home.homeDirectory = "/home/hayatroid";
@@ -14,7 +23,6 @@
   home.packages = with pkgs; [
     cz-cli
     delta
-    docker
     dua
     eza
     fd
@@ -24,6 +32,7 @@
     gitmoji-cli
     htmlq
     jq
+    nerdctl
     openssl
     pkg-config
     procs
@@ -95,8 +104,8 @@
         gc = "git commit --message";
         gp = "git push";
 
-        du = "docker compose up --detach";
-        dd = "docker compose down";
+        nu = "nerdctl compose up --detach";
+        nd = "nerdctl compose down";
       };
     };
 

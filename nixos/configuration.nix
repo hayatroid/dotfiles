@@ -6,12 +6,8 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.05";
 
-  virtualisation.docker.enable = true;
   users.users.hayatroid = {
     shell = pkgs.zsh;
-    extraGroups = [
-      "docker"
-    ];
   };
 
   environment.systemPackages = with pkgs; [
